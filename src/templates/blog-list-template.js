@@ -5,21 +5,23 @@ import {Link} from 'gatsby'
 import styles from '../css/blog.module.css'
 import BlogCard from '../components/Blog/BlogCard'
 import Title from '../components/Title'
+import StyledHero from '../components/StyledHero'
 
 const Blog = (props) => {
 
 	const {currentPage, numPages} = props.pageContext;
 
-	const prevPage = currentPage - 1 === 1? `/blogs/` : `/blogs/${currentPage - 1}`;
-	const nextPage = `/blogs/${currentPage + 1}`;
+	const prevPage = currentPage - 1 === 1? `/blog/` : `/blog/${currentPage - 1}`;
+	const nextPage = `/blog/${currentPage + 1}`;
 	
 	const isFirst = currentPage === 1;
 	const isLast = currentPage === numPages;
-
 	const {data} = props;
 
 	return (
+
 		<Layout>
+			<StyledHero img={props.data.bgImage.childImageSharp.fluid} />
 			<section className={styles.blog}>
 				<Title title="our" subtitle="blog"/>
 				<div className={styles.center}>
@@ -37,7 +39,7 @@ const Blog = (props) => {
 					{Array.from({ length: numPages }, (_,i) => {
 						return (
 							<Link key={i} 
-							to={ i === 0 ? `/blogs/` : `/blogs/${i+1}`}
+							to={ i === 0 ? `/blog/` : `/blog/${i+1}`}
 							className={
 								i + 1 === currentPage 
 								? `${styles.link} ${styles.active}` 
@@ -66,9 +68,16 @@ export const query = graphql`
 					published(formatString:"MMMM D, YYYY")
 					image {
 						fluid {
-							...GatsbyContentfulFluid_tracedSVG
+							...GatsbyContentfulFluid
 						}
 					}
+				}
+			}
+		}
+		bgImage: file(relativePath: {eq: "blogBcg.jpeg"}) {
+			childImageSharp {
+				fluid {
+					...GatsbyImageSharpFluid_tracedSVG
 				}
 			}
 		}

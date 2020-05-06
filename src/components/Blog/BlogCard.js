@@ -10,7 +10,7 @@ const BlogCard = ({blog}) => {
 		<article className={styles.blog}>
 				<div className={styles.imgContainer}>
 				<Image className={styles.img} fluid={image.fluid} alt=""/>
-				<Link className={styles.link} to={`/posts/${slug}`}>read more</Link>
+				<Link className={styles.link} to={`posts/${slug}`}>read more</Link>
 				<h6 className={styles.date}>{published}</h6>
 			</div>
 			<div className={styles.footer}>

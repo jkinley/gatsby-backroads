@@ -8,7 +8,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 const Blog = ({data}) => {
 
-	console.log(data)
+	console.log("data", data)
 
 	const {title, published, text:{json}} = data.post;
 
